@@ -1,6 +1,6 @@
 - name: Lock Playbook
   hosts: localhost
-  vars:
+  vars
     lock_file_path: /tmp/ansible-playbook-{{ansible_ssh_user}}.lock
 
   pre_tasks: 
