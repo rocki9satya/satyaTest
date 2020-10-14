@@ -1,0 +1,35 @@
+- name: Lock Playbook
+  hosts: localhost
+  vars:
+    lock_file_path: /tmp/ansible-playbook-{{ansible_ssh_user}}.lock
+
+  pre_tasks: 
+     - stat: 
+         path: "{{ lock_file_path }}"
+       register: lock_file
+
+     - fail: msg="Sorry, I found a lockfile, so I'm assuming that someone was already running ansible when you started this deploy job. Add -f to your deploy command to forcefully continue deploying, if the previous deploy was aborted."
+       when: lock_file.stat.exists|bool and not force_ignore_lock|bool
+
+     - file: 
+         path: "{{ lock_file_path }}" 
+         state: absent
+       become: yes
+       when: "{{ force_ignore_lock }}"
+
+     - file: 
+         path: "{{ lock_file_path }}" 
+         state: touch
+       become: yes
+  tasks:
+     - name: Test Lock
+       debug: msg="I am here to pause"
+     - pause:
+         seconds: 30
+     - debug: msg="Done with pause"
+ 
+  post_tasks:
+     - file: 
+         path: "{{ lock_file_path }}" 
+         state: absent
+       become: yes
