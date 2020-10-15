@@ -1,5 +1,5 @@
 ---
- :name: "Get ping response"
+ - name: "Get ping response"
    hosts: all
    gather_facts: no
    tasks:
