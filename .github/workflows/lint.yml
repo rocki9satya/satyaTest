@@ -10,10 +10,12 @@ jobs:
     steps:
     # Important: This sets up your GITHUB_WORKSPACE environment variable
     - uses: actions/checkout@v2
+    - name: Detect Secrets
+      uses: evanextreme/detect-secrets-action@1.0.0
 
     - name: Lint Ansible Playbook
       # replace "master" with any valid ref
-      uses: ansible/ansible-lint-action@main
+      uses: ansible/ansible-lint-action@master
       with:
         # [required]
         # Paths to ansible files (i.e., playbooks, tasks, handlers etc..)
