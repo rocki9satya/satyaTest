@@ -25,7 +25,7 @@ jobs:
          #targets: |
           #pingTest.yml
         #   playbook_2.yml
-        targets: "./*.yml"
+        targets: "./pingTest.yml"
         # [optional]
         # Arguments to be passed to the ansible-lint
 
