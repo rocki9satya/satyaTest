@@ -3,5 +3,6 @@
    hosts: all
    gather_facts: no
    tasks:
-   - action: ping
-     register: command_output
+     - name: Action 
+       action: ping
+       register: command_output
